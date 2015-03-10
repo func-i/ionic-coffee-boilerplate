@@ -4,7 +4,6 @@
   'ngAnimate',
   'ngCookies',
   'ngResource',
-  'ngRoute',
   'ngSanitize',
   'ngTouch',
   'ui.router',
