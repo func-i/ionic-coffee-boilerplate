@@ -1,4 +1,4 @@
-@angularCoffeeApp.factory 'authenticatedInterceptor', () ->
+@angularIonicApp.factory 'authenticatedInterceptor', () ->
   
   request: (config) ->    
     # if the user is logged in, set it here

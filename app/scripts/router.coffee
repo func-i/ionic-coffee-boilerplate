@@ -1,6 +1,6 @@
 'use strict'
 
-@angularCoffeeApp.config ($urlRouterProvider, $stateProvider, $compileProvider, $httpProvider) ->
+@angularIonicApp.config ($urlRouterProvider, $stateProvider, $compileProvider, $httpProvider) ->
   
   $httpProvider.interceptors.push 'authenticatedInterceptor', 'unauthenticatedInterceptor'
 

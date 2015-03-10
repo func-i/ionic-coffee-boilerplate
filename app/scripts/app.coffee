@@ -1,6 +1,6 @@
 "use strict"
 
-@angularCoffeeApp = angular.module "angularCoffeeApp", [
+@angularIonicApp = angular.module "angularIonicApp", [
   'ngAnimate',
   'ngCookies',
   'ngResource',
@@ -9,22 +9,22 @@
   'ngTouch',
   'ui.router',
 
-  'angularCoffeeApp.controllers',
-  'angularCoffeeApp.directives',
-  'angularCoffeeApp.filters',
-  'angularCoffeeApp.resources',
-  'angularCoffeeApp.services',
-  'angularCoffeeApp.interceptors'
+  'angularIonicApp.controllers',
+  'angularIonicApp.directives',
+  'angularIonicApp.filters',
+  'angularIonicApp.resources',
+  'angularIonicApp.services',
+  'angularIonicApp.interceptors'
 ]
 
-@controllerModule  = angular.module 'angularCoffeeApp.controllers', []
-@directiveModule   = angular.module 'angularCoffeeApp.directives', []
-@filterModule      = angular.module 'angularCoffeeApp.filters', []
-@resourceModule    = angular.module 'angularCoffeeApp.resources', []
-@serviceModule     = angular.module 'angularCoffeeApp.services', []
-@configModule      = angular.module 'angularCoffeeApp.config', []
-@interceptorModule = angular.module 'angularCoffeeApp.interceptors', []
+@controllerModule  = angular.module 'angularIonicApp.controllers', []
+@directiveModule   = angular.module 'angularIonicApp.directives', []
+@filterModule      = angular.module 'angularIonicApp.filters', []
+@resourceModule    = angular.module 'angularIonicApp.resources', []
+@serviceModule     = angular.module 'angularIonicApp.services', []
+@configModule      = angular.module 'angularIonicApp.config', []
+@interceptorModule = angular.module 'angularIonicApp.interceptors', []
 
-@angularCoffeeApp.run ($rootScope, $state) ->
+@angularIonicApp.run ($rootScope, $state) ->
   # Do other stuff here as needed
   console.log "App started"

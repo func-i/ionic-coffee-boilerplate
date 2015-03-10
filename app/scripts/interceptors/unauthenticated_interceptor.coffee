@@ -1,4 +1,4 @@
-@angularCoffeeApp.factory 'unauthenticatedInterceptor', () ->
+@angularIonicApp.factory 'unauthenticatedInterceptor', () ->
   
   responseError: (response) ->
     if response.status is 401
