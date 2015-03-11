@@ -13,5 +13,5 @@ describe 'Controller: HomeCtrl', ->
         $scope: scope
       return true
 
-  it 'should set company name to Test Company', ->
+  it 'should set company name to "Test Company"', ->
     expect(HomeCtrl.company.name).toBe 'Test Company'

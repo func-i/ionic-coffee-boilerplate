@@ -1,7 +1,7 @@
 (function() {
   var BASE_URL, homePage;
 
-  BASE_URL = 'http://localhost:9000/';
+  BASE_URL = 'http://localhost:9001/';
 
   homePage = function() {
     this.aboutLink = element(By.css('a[ui-sref="about"]'));

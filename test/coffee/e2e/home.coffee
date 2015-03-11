@@ -1,5 +1,5 @@
 
-BASE_URL = 'http://localhost:9000/'
+BASE_URL = 'http://localhost:9001/'
 
 homePage = ->
   @aboutLink    = element By.css 'a[ui-sref="about"]'

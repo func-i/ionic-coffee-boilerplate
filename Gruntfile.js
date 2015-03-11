@@ -51,7 +51,8 @@ module.exports = function (grunt) {
       coffeeTestE2E: {
         files: ['test/coffee/e2e/**/*.{coffee,litcoffee,coffee.md}'],
         tasks: [
-          'newer:coffee:test', 
+          'newer:coffee:test',
+          'connect:test', 
           'protractor_webdriver:start', 
           'protractor:e2e'
         ]
@@ -483,10 +484,7 @@ module.exports = function (grunt) {
         // debug: true,
      
         // Additional arguments that are passed to the webdriver command
-        args: {
-          // seleniumServerJar: 'node_modules/protractor/selenium/selenium-server-standalone-2.39.0.jar',
-          // chromeDriver: 'node_modules/protractor/selenium/chromedriver.exe'
-        }
+        args: { }
       },
       e2e: {
         options: {
@@ -533,8 +531,8 @@ module.exports = function (grunt) {
     'wiredep',
     'concurrent:test',
     'autoprefixer',
-    'connect:test',
     'karma',
+    'connect:test',
     'protractor_webdriver:start',
     'protractor:e2e'
   ]);
