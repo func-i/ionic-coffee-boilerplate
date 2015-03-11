@@ -5,6 +5,7 @@
   $httpProvider.interceptors.push 'authenticatedInterceptor', 'unauthenticatedInterceptor'
 
   $urlRouterProvider.otherwise('/')
+  
   $stateProvider
     .state "home",
       url: "/"

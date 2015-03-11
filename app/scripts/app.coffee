@@ -1,12 +1,10 @@
 "use strict"
 
 @angularIonicApp = angular.module "angularIonicApp", [
-  'ngAnimate',
+  'ionic',
   'ngCookies',
   'ngResource',
-  'ngSanitize',
   'ngTouch',
-  'ui.router',
 
   'angularIonicApp.controllers',
   'angularIonicApp.directives',
@@ -24,6 +22,14 @@
 @configModule      = angular.module 'angularIonicApp.config', []
 @interceptorModule = angular.module 'angularIonicApp.interceptors', []
 
-@angularIonicApp.run ($rootScope, $state) ->
-  # Do other stuff here as needed
-  console.log "App started"
+@angularIonicApp.run ($ionicPlatform, $rootScope, $state) ->
+  $ionicPlatform.ready () ->
+    # Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    # for form inputs)
+    if window.cordova && window.cordova.plugins.Keyboard
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar true
+
+    if window.StatusBar
+      StatusBar.styleDefault()
+
+    console.log "App started"
