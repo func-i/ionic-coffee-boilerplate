@@ -14,4 +14,4 @@ describe 'Controller: AboutCtrl', ->
       return true
 
   it 'set company description on the scope', ->
-    expect(scope.companyDesc).toBe "Something about our company."
+    expect(scope.companyDesc).toBe 'Something about our company.'
