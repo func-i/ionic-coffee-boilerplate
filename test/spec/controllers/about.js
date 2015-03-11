@@ -14,7 +14,7 @@
         return true;
       });
     });
-    return it('should set company description on the scope', function() {
+    return it('set company description on the scope', function() {
       return expect(scope.companyDesc).toBe("Something about our company.");
     });
   });

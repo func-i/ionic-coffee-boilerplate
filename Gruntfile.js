@@ -42,7 +42,7 @@ module.exports = function (grunt) {
         tasks: ['newer:coffee:dist']
       },
       coffeeTest: {
-        files: ['test/spec/**/*.{coffee,litcoffee,coffee.md}'],
+        files: ['test/coffee/**/*.{coffee,litcoffee,coffee.md}'],
         tasks: ['newer:coffee:test', 'karma']
       },
       compass: {
@@ -234,7 +234,7 @@ module.exports = function (grunt) {
       test: {
         files: [{
           expand: true,
-          cwd: 'test/spec',
+          cwd: 'test/coffee',
           src: '**/*.coffee',
           // dest: '.tmp/spec',
           dest: 'test/spec',
