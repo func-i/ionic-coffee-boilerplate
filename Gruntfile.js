@@ -477,7 +477,7 @@ module.exports = function (grunt) {
     // Testing: End-To-End tests with Protractor
     protractor: {
       options: {
-        configFile: "test/protractor.conf.js",
+        configFile: 'test/protractor.conf.js',
         noColor: false,
      
         // Set to true if you would like to use the Protractor command line debugging tool

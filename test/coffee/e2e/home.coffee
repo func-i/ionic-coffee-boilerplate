@@ -1,8 +1,9 @@
+'use strict'
 
 BASE_URL = 'http://localhost:9001/'
 
-homePage = ->
-  @aboutLink    = element By.css 'a[ui-sref="about"]'
+HomePage = ->
+  @aboutLink = element By.css 'a[ui-sref="about"]'
 
   @get = ->
     browser.get BASE_URL
@@ -11,7 +12,7 @@ homePage = ->
 
 
 describe 'Home Page', ->
-  homeP = new homePage()
+  homeP = new HomePage()
 
   beforeEach ->
     homeP.get()

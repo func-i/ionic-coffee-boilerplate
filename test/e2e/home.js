@@ -1,9 +1,10 @@
 (function() {
-  var BASE_URL, homePage;
+  'use strict';
+  var BASE_URL, HomePage;
 
   BASE_URL = 'http://localhost:9001/';
 
-  homePage = function() {
+  HomePage = function() {
     this.aboutLink = element(By.css('a[ui-sref="about"]'));
     this.get = function() {
       return browser.get(BASE_URL);
@@ -13,7 +14,7 @@
 
   describe('Home Page', function() {
     var homeP;
-    homeP = new homePage();
+    homeP = new HomePage();
     beforeEach(function() {
       return homeP.get();
     });
