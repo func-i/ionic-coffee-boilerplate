@@ -13,9 +13,7 @@ version 0.11.1.
 
 `grunt test` will run the unit tests with Karma and end-to-end tests with Protractor
 
-The Protractor tests require you to run the Selenium server on your local machine. Install the following: 
-1. Java Development Kit (JDK)
-2. run `webdriver-manager update`
+The Protractor tests require you to run the Selenium server on your local machine. Install the Java Development Kit (JDK) if you don't have it on your system.
 
 ## Run server
 
