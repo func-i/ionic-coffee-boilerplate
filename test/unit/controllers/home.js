@@ -14,7 +14,7 @@
         return true;
       });
     });
-    return it('should set company name', function() {
+    return it('should set company name to "Test Company"', function() {
       return expect(HomeCtrl.company.name).toBe('Test Company');
     });
   });

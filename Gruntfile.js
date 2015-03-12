@@ -3,9 +3,9 @@
 
 // # Globbing
 // for performance reasons we're only matching one level down:
-// 'test/spec/**/*.js'
+// 'test/unit/**/*.js'
 // use this if you want to recursively match all subfolders:
-// 'test/spec/**/*.js'
+// 'test/unit/**/*.js'
 
 module.exports = function (grunt) {
 
@@ -41,9 +41,21 @@ module.exports = function (grunt) {
         ],
         tasks: ['newer:coffee:dist']
       },
-      coffeeTest: {
-        files: ['test/coffee/**/*.{coffee,litcoffee,coffee.md}'],
-        tasks: ['newer:coffee:test', 'karma']
+      coffeeTestUnit: {
+        files: ['test/coffee/unit/**/*.{coffee,litcoffee,coffee.md}'],
+        tasks: [
+          'newer:coffee:test', 
+          'karma'
+        ]
+      },
+      coffeeTestE2E: {
+        files: ['test/coffee/e2e/**/*.{coffee,litcoffee,coffee.md}'],
+        tasks: [
+          'newer:coffee:test',
+          'connect:test', 
+          'protractor_webdriver:start', 
+          'protractor:e2e'
+        ]
       },
       compass: {
         files: ['<%= yeoman.app %>/styles/**/*.{scss,sass}'],
@@ -137,7 +149,9 @@ module.exports = function (grunt) {
         options: {
           jshintrc: 'test/.jshintrc'
         },
-        src: ['test/spec/**/*.js']
+        src: ['test/e2e/**/*.js',
+              'test/unit/**/*.js'
+        ]
       }
     },
 
@@ -237,7 +251,7 @@ module.exports = function (grunt) {
           cwd: 'test/coffee',
           src: '**/*.coffee',
           // dest: '.tmp/spec',
-          dest: 'test/spec',
+          dest: 'test',
           ext: '.js'
         }]
       }
@@ -452,11 +466,41 @@ module.exports = function (grunt) {
       ]
     },
 
-    // Test settings
+    // Testing: Unit tests with Karma
     karma: {
       unit: {
         configFile: 'test/karma.conf.js',
         singleRun: true
+      }
+    },
+
+    // Testing: End-To-End tests with Protractor
+    protractor: {
+      options: {
+        configFile: 'test/protractor.conf.js',
+        noColor: false,
+     
+        // Set to true if you would like to use the Protractor command line debugging tool
+        // debug: true,
+     
+        // Additional arguments that are passed to the webdriver command
+        args: { }
+      },
+      e2e: {
+        options: {
+          // Stops Grunt process if a test fails
+          keepAlive: false
+        }
+      }
+    },
+
+    // Testing: Starting up Selenium server for Protractor tests
+    protractor_webdriver: {
+      start: {
+        options: {
+          path: 'node_modules/protractor/bin/',
+          command: 'webdriver-manager start'
+        }
       }
     }
   });
@@ -487,8 +531,10 @@ module.exports = function (grunt) {
     'wiredep',
     'concurrent:test',
     'autoprefixer',
+    'karma',
     'connect:test',
-    'karma'
+    'protractor_webdriver:start',
+    'protractor:e2e'
   ]);
 
   grunt.registerTask('build', [
