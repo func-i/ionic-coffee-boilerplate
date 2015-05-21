@@ -519,7 +519,25 @@ module.exports = function (grunt) {
     'wiredep',
     'concurrent:test',
     'autoprefixer',
-    // 'karma',
+    'karma',
+    'connect:test',
+    'protractor_webdriver:start',
+    'protractor:e2e'
+  ]);
+
+  grunt.registerTask('test-unit', [
+    'clean:server',
+    'wiredep',
+    'concurrent:test',
+    'autoprefixer',
+    'karma'
+  ]);
+
+  grunt.registerTask('test-e2e', [
+    'clean:server',
+    'wiredep',
+    'concurrent:test',
+    'autoprefixer',
     'connect:test',
     'protractor_webdriver:start',
     'protractor:e2e'

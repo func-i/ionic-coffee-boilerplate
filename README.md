@@ -16,8 +16,14 @@ version 0.11.1.
 
 ## Testing
 
+- grunt test-unit
+  runs unit tests with Karma
+
+- grunt test-e2e
+  runs end-to-end tests with Protractor
+
 - grunt test
-  will run the unit tests with Karma and end-to-end tests with Protractor
+  runs both unit and end-to-end tests
 
 The Protractor tests require you to run the Selenium server on your local machine. Install the Java Development Kit (JDK) if you don't have it on your system.
 
