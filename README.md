@@ -16,20 +16,20 @@ version 0.11.1.
 
 ## Testing
 
+Unit tests with Karma
 - grunt test-unit
-  runs unit tests with Karma
-
+  
+End-to-end tests with Protractor
 - grunt test-e2e
-  runs end-to-end tests with Protractor
 
+Both unit and end-to-end tests
 - grunt test
-  runs both unit and end-to-end tests
 
 The Protractor tests require you to run the Selenium server on your local machine. Install the Java Development Kit (JDK) if you don't have it on your system.
 
 ## Deploy to staging
 
-Set up your deployment target (eg. gh-pages) in Gruntfile.js - buildcontrol
+Set up your deployment target (eg. gh-pages) in Gruntfile.js, the buildcontrol task
 
 - grunt deploy
 

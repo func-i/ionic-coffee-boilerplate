@@ -7,7 +7,9 @@ exports.config = {
 
   framework: 'jasmine2',
   
-  specs: ['e2e/home.js'],
+  specs: [
+    'e2e/home.js'
+  ],
 
   jasmineNodeOpts: {
     // Show output in color
