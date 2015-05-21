@@ -9,10 +9,10 @@
   $stateProvider
     .state "home",
       url: "/"
-      templateUrl: "views/home.html"
+      templateUrl: "templates/home.html"
       controller: "HomeCtrl as homeCtrl"
 
     .state "about",
       url: "/about"
-      templateUrl: "views/about.html"
+      templateUrl: "templates/about.html"
       controller: "AboutCtrl as aboutCtrl"

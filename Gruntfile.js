@@ -39,24 +39,6 @@ module.exports = function (grunt) {
         ],
         tasks: ['newer:coffee:dist']
       },
-      coffeeTestUnit: {
-        files: ['test/coffee/unit/**/*.{coffee,litcoffee,coffee.md}',
-                'test/coffee/mock/**/*.{coffee,litcoffee,coffee.md}'],
-        tasks: [
-          'newer:coffee:test', 
-          'karma'
-        ]
-      },
-      coffeeTestE2E: {
-        files: ['test/coffee/e2e/**/*.{coffee,litcoffee,coffee.md}',
-                'test/coffee/mock/**/*.{coffee,litcoffee,coffee.md}'],
-        tasks: [
-          'newer:coffee:test',
-          'connect:test', 
-          'protractor_webdriver:start', 
-          'protractor:e2e'
-        ]
-      },
       compass: {
         files: ['<%= yeoman.app %>/styles/**/*.{scss,sass}'],
         tasks: ['compass:server', 'autoprefixer']
@@ -137,7 +119,6 @@ module.exports = function (grunt) {
       all: {
         src: [
           'Gruntfile.js',
-          // '<%= yeoman.app %>/scripts/**/*.js'
           '.tmp/js/**/*.js'
         ]
       },
@@ -145,9 +126,10 @@ module.exports = function (grunt) {
         options: {
           jshintrc: 'test/.jshintrc'
         },
-        src: ['test/e2e/**/*.js',
-              'test/unit/**/*.js',
-              'test/mock/**/*.js'
+        src: [
+          'test/e2e/**/*.js',
+          'test/unit/**/*.js',
+          'test/mock/**/*.js'
         ]
       }
     },
@@ -464,7 +446,7 @@ module.exports = function (grunt) {
         options: {
           dir: '<%= yeoman.dist %>',
           branch: 'gh-pages',
-          remote: 'git@github.com:Gubagoo/callresq-mobile.git',
+          remote: 'SSH of your project repo',
           remoteBranch: 'gh-pages',
           commit: true,
           push: true
@@ -560,7 +542,7 @@ module.exports = function (grunt) {
     'htmlmin'
   ]);
 
-  // Deploy to staging (GitHub Pages) for now
+  // Deploy to staging (GitHub Pages)
   grunt.registerTask('deploy', [
     'build',
     'buildcontrol:staging'

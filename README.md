@@ -28,4 +28,6 @@ The Protractor tests require you to run the Selenium server on your local machin
 
 ## Deploy to staging
 
+Set up your deployment target (eg. gh-pages) in Gruntfile.js - buildcontrol
+
 - grunt deploy
