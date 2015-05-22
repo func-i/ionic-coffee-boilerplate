@@ -35,5 +35,4 @@ Set up your deployment target (eg. gh-pages) in Gruntfile.js, the buildcontrol t
 
 ## Android deployment
 
-- grunt build
-- ionic build android
+- grunt build-android
