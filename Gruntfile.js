@@ -454,6 +454,13 @@ module.exports = function (grunt) {
       }
     },
 
+    // Execute shell commands
+    // Ionic builds (Android and IOS)
+    exec: {
+      build_android: 'ionic build android',
+      build_ios: 'ionic build ios'
+    },
+
     // Testing: Unit tests with Karma
     karma: {
       unit: {
@@ -558,6 +565,16 @@ module.exports = function (grunt) {
     'filerev',
     'usemin',
     'htmlmin'
+  ]);
+
+  grunt.registerTask('build-android', [
+    'build',
+    'exec:build_android'
+  ]);
+
+  grunt.registerTask('build-ios', [
+    'build',
+    'exec:build_ios'
   ]);
 
   // Deploy to staging (GitHub Pages)
