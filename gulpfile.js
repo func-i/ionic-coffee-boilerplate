@@ -15,16 +15,6 @@ gulp.task('clean', function () {
   ]);
 });
 
-// inject bower components into the app (web)
-gulp.task('wiredep:web', function () {
-  return gulp.src('app/index.html')
-    .pipe( wiredep({
-      devDependencies: true,  // for angular-mocks.js, to mock HTTP response from API
-      ignorePath:  /\.\.\//
-    }) )
-    .pipe( gulp.dest('.tmp') );
-});
-
 // coompile CoffeeScript to JavaScript
 // add source maps
 gulp.task('coffee', function() {
@@ -117,6 +107,12 @@ gulp.task('concat-css-vendor', function() {
     .pipe( gulp.dest('www/css') );
 });
 
+// copy index.html to /www
+gulp.task('copy-html', function() {
+  return gulp.src('app/**/*.html')
+    .pipe( gulp.dest('www') );
+});
+
 // connect to local server for development
 gulp.task('connect', function() {
   plugins.connect.server({
@@ -128,7 +124,7 @@ gulp.task('connect', function() {
 
 // reload html files
 gulp.task('reload-html', function () {
-  gulp.src('./app/*.html')
+  gulp.src('./app/**/*.html')
     .pipe( plugins.connect.reload() );
 });
 
@@ -141,9 +137,10 @@ gulp.task('watch', function () {
 gulp.task('serve', function () {
   runSequence(
     'clean',
-    ['wiredep:web', 'coffee', 'sass'],
-    ['concat-js', 'concat-js-vendor', 'concat-css', 'concat-css-vendor']
-    // 'connect', 
-    // 'watch'
+    ['coffee', 'sass'],
+    ['concat-js', 'concat-js-vendor', 'concat-css', 'concat-css-vendor'],
+    'copy-html',
+    'connect', 
+    'watch'
   );
 });
