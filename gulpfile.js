@@ -30,7 +30,7 @@ gulp.task('wiredep:web', function () {
 gulp.task('coffee', function() {
   return gulp.src('app/scripts/**/*.coffee')
     .pipe( plugins.sourcemaps.init() )
-    .pipe( plugins.coffee({ bare: true }).on('error', plugins.util.log) )
+      .pipe( plugins.coffee({ bare: true }).on('error', plugins.util.log) )
     .pipe( plugins.sourcemaps.write('.') )
     .pipe( gulp.dest('.tmp/js') )
 });
@@ -40,22 +40,51 @@ gulp.task('coffee', function() {
 gulp.task('sass', function () {
   return gulp.src('app/styles/**/*.scss')
     .pipe( plugins.sourcemaps.init() )
-    .pipe( plugins.sass().on('error', plugins.sass.logError) )
-    .pipe( plugins.autoprefixer({ browsers: ['last 2 versions'] }) )
+      .pipe( plugins.sass().on('error', plugins.sass.logError) )
+      .pipe( plugins.autoprefixer({ browsers: ['last 2 versions'] }) )
     .pipe( plugins.sourcemaps.write('.') )
     .pipe( gulp.dest('.tmp/css') );
 });
 
-gulp.task('usemin', function() {
-  gulp.src('.tmp/index.html')
-    .pipe( plugins.usemin({
-      // assetsDir: 'www',
-      // css:        [ plugins.rev() ],
-      html:       [ plugins.minifyHtml({ empty: true }) ],
-      js:         [ plugins.uglify() ],
-      inlinejs:   [ plugins.uglify() ],
-      inlinecss:  [ plugins.minifyCss(), 'concat' ]
-    }) )
+// concatenate JavaScript - your code
+gulp.task('concat-js', function() {
+  return gulp.src(
+    [ 
+      'app.js',
+      'router.js',
+      'interceptors/authenticated_interceptor.js',
+      'interceptors/unauthenticated_interceptor.js',
+      'controllers/home_ctrl.js',
+      'controllers/about_ctrl.js' 
+    ], { 
+      cwd: '.tmp/js' 
+    })
+    .pipe( plugins.sourcemaps.init({ loadMaps: true }) )
+      .pipe( plugins.concat('scripts.js') )
+    .pipe( plugins.sourcemaps.write('.') )
+    .pipe( gulp.dest('www') );
+});
+
+// concatenate JavaScript - vendor scripts (bower_components)
+gulp.task('concat-js-vendor', function() {
+  return gulp.src(
+    [ 
+      'angular/angular.js',
+      'angular-animate/angular-animate.js',
+      'angular-sanitize/angular-sanitize.js',
+      'angular-ui-router/release/angular-ui-router.js',
+      'ionic/js/ionic.js',
+      'ionic/js/ionic-angular.js',
+      'angular-cookies/angular-cookies.js',
+      'angular-resource/angular-resource.js',
+      'angular-touch/angular-touch.js',
+      'angular-mocks/angular-mocks.js' 
+    ], { 
+      cwd: 'bower_components' 
+    })
+    .pipe( plugins.sourcemaps.init() )
+      .pipe( plugins.concat('vendor.js') )
+    .pipe( plugins.sourcemaps.write('.') )
     .pipe( gulp.dest('www') );
 });
 
@@ -84,7 +113,8 @@ gulp.task('serve', function () {
   runSequence(
     'clean',
     ['wiredep:web', 'coffee', 'sass'],
-    'usemin'
+    'concat-js',
+    'concat-js-vendor'
     // 'connect', 
     // 'watch'
   );
