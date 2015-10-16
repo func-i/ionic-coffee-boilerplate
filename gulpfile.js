@@ -2,15 +2,18 @@
 var gulp = require('gulp'); 
 
 // include plug-ins
-var plugins = require('gulp-load-plugins')();
-var del     = require('del');
-var wiredep = require('wiredep').stream;
+var plugins     = require('gulp-load-plugins')();
+var del         = require('del');
+var wiredep     = require('wiredep').stream;
+var runSequence = require('run-sequence');
 
 // empty folders before building for mobile
 gulp.task('clean', function () {
   return del([
-    '.tmp/**', '!.tmp', // ** includes the parent dir
-    'www/**', '!www'
+    '.tmp/**/*', 
+    // '!.tmp', // ** includes the parent dir
+    'www/**/*', 
+    // '!www'
   ]);
 });
 
@@ -54,29 +57,23 @@ gulp.task('connect', function() {
   });
 });
 
+// reload html files
 gulp.task('reload-html', function () {
   gulp.src('./app/*.html')
     .pipe( plugins.connect.reload() );
 });
- 
+
+// watch for changes and reload
 gulp.task('watch', function () {
   gulp.watch(['./app/*.html'], ['reload-html']);
 });
 
 // development
-gulp.task('serve', [
-  'clean',
-  'wiredep:web',
-  'connect', 
-  'watch'
-]);
-
-// default gulp task
-gulp.task('default', ['imagemin', 'htmlpage', 'scripts', 'styles'], function() {
-   // watch for HTML changes
-  gulp.watch('./src/*.html', ["htmlpage"]);
-  // watch for JS changes
-  gulp.watch('./src/scripts/*.js', ["jshint", "scripts"]);
-  // watch for CSS changes
-  gulp.watch('./src/styles/*.css', ["styles"]);
+gulp.task('serve', function () {
+  runSequence(
+    'clean',
+    ['wiredep:web', 'coffee', 'sass'],
+    'connect', 
+    'watch'
+  );
 });
