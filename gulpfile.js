@@ -62,7 +62,7 @@ gulp.task('concat-js', function() {
     .pipe( plugins.sourcemaps.init({ loadMaps: true }) )
       .pipe( plugins.concat('scripts.js') )
     .pipe( plugins.sourcemaps.write('.') )
-    .pipe( gulp.dest('www') );
+    .pipe( gulp.dest('www/js') );
 });
 
 // concatenate JavaScript - vendor scripts (bower_components)
@@ -85,7 +85,36 @@ gulp.task('concat-js-vendor', function() {
     .pipe( plugins.sourcemaps.init() )
       .pipe( plugins.concat('vendor.js') )
     .pipe( plugins.sourcemaps.write('.') )
-    .pipe( gulp.dest('www') );
+    .pipe( gulp.dest('www/js') );
+});
+
+// concatenate CSS - your code
+gulp.task('concat-css', function() {
+  return gulp.src(
+    [ 
+      'main.css',
+      'media.css'
+    ], { 
+      cwd: '.tmp/css' 
+    })
+    .pipe( plugins.sourcemaps.init({ loadMaps: true }) )
+      .pipe( plugins.concat('styles.css') )
+    .pipe( plugins.sourcemaps.write('.') )
+    .pipe( gulp.dest('www/css') );
+});
+
+// concatenate CSS - vendor stylesheets (bower_components)
+gulp.task('concat-css-vendor', function() {
+  return gulp.src(
+    [ 
+      'ionic/css/ionic.css'
+    ], { 
+      cwd: 'bower_components' 
+    })
+    .pipe( plugins.sourcemaps.init() )
+      .pipe( plugins.concat('vendor.css') )
+    .pipe( plugins.sourcemaps.write('.') )
+    .pipe( gulp.dest('www/css') );
 });
 
 // connect to local server for development
@@ -113,8 +142,7 @@ gulp.task('serve', function () {
   runSequence(
     'clean',
     ['wiredep:web', 'coffee', 'sass'],
-    'concat-js',
-    'concat-js-vendor'
+    ['concat-js', 'concat-js-vendor', 'concat-css', 'concat-css-vendor']
     // 'connect', 
     // 'watch'
   );
