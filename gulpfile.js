@@ -107,10 +107,22 @@ gulp.task('concat-css-vendor', function() {
     .pipe( gulp.dest('www/css') );
 });
 
-// copy index.html to /www
+// copy html files to /www
 gulp.task('copy-html', function() {
   return gulp.src('app/**/*.html')
     .pipe( gulp.dest('www') );
+});
+
+// copy image files to /www/img
+gulp.task('copy-img', function() {
+  return gulp.src('app/img/**/*')
+    .pipe( gulp.dest('www/img') );
+});
+
+// copy fonts files to /www/fonts
+gulp.task('copy-font', function() {
+  return gulp.src('bower_components/ionic/fonts/**/*')
+    .pipe( gulp.dest('www/fonts') );
 });
 
 // connect to local server for development
@@ -147,7 +159,7 @@ gulp.task('serve', function () {
     'clean',
     ['coffee', 'sass'],
     ['concat-js', 'concat-js-vendor', 'concat-css', 'concat-css-vendor'],
-    'copy-html',
+    ['copy-html', 'copy-img', 'copy-font'],
     'connect', 
     'watch',
     'open-browser'
