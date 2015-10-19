@@ -133,6 +133,14 @@ gulp.task('watch', function () {
   gulp.watch(['./app/*.html'], ['reload-html']);
 });
 
+// open http://localhost:9000/index.html in browser
+gulp.task('open-browser', function(){
+  gulp.src('')
+    .pipe( plugins.open({
+      uri: 'http://localhost:9000/index.html'
+    }) );
+});
+
 // development
 gulp.task('serve', function () {
   runSequence(
@@ -141,6 +149,7 @@ gulp.task('serve', function () {
     ['concat-js', 'concat-js-vendor', 'concat-css', 'concat-css-vendor'],
     'copy-html',
     'connect', 
-    'watch'
+    'watch',
+    'open-browser'
   );
 });
